@@ -1,30 +1,14 @@
-const CACHE = 'cashflow-v1';
+const CACHE = 'cashflow-v2';
 const ASSETS = [
-  './',
-  './index.html',
-  './manifest.json',
-  './css/variables.css',
-  './css/base.css',
-  './css/components.css',
-  './css/dashboard.css',
-  './css/transactions.css',
-  './css/charts.css',
-  './css/goals.css',
-  './css/calculator.css',
-  './css/settings.css',
-  './css/modal.css',
-  './css/animations.css',
-  './js/storage.js',
-  './js/categories.js',
-  './js/transactions.js',
-  './js/goals.js',
-  './js/charts.js',
-  './js/calculator.js',
-  './js/insights.js',
-  './js/settings.js',
-  './js/modal.js',
-  './js/dashboard.js',
-  './js/app.js'
+  './', './index.html', './manifest.json',
+  './css/variables.css','./css/base.css','./css/components.css',
+  './css/dashboard.css','./css/transactions.css','./css/charts.css',
+  './css/goals.css','./css/calculator.css','./css/settings.css',
+  './css/modal.css','./css/animations.css',
+  './js/storage.js','./js/categories.js','./js/transactions.js',
+  './js/goals.js','./js/finance.js','./js/charts.js',
+  './js/calculator.js','./js/insights.js','./js/settings.js',
+  './js/modal.js','./js/dashboard.js','./js/app.js',
 ];
 
 self.addEventListener('install', e => {
@@ -40,7 +24,5 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
-  );
+  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
 });

@@ -36,3 +36,47 @@
 .work-history-date { color: var(--text-muted); }
 .work-history-detail { color: var(--text-secondary); }
 .work-history-earn { color: var(--income-color); font-weight: 700; }
+
+/* ── Presets ── */
+.preset-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.preset-chip {
+  background: var(--bg-input);
+  border: 1px solid var(--border-strong);
+  border-radius: 20px;
+  padding: 6px 13px;
+  font-size: 0.8rem;
+  font-family: var(--font);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.preset-chip:active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Highlight result row */
+.calc-result-card.highlight {
+  border-color: var(--accent-glow);
+  background: var(--accent-dim);
+}
+
+/* Work history total row */
+.work-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+}

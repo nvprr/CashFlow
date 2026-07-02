@@ -79,3 +79,40 @@
 }
 .insight-icon { font-size: 1.1rem; flex-shrink: 0; }
 .insight-text { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.4; }
+
+/* ── Burn Rate Card ── */
+.burn-rate-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+.burn-rate-left { flex: 1; }
+.burn-rate-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.burn-rate-days-wrap { display: flex; align-items: baseline; gap: 4px; }
+.burn-rate-days-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.burn-rate-days-unit { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; }
+.burn-label { font-size: 0.78rem; margin-top: 4px; color: var(--text-muted); }
+.burn-label.safe   { color: var(--income-color); }
+.burn-label.warn   { color: var(--savings-color); }
+.burn-label.danger { color: var(--expense-color); }
+.burn-rate-right { flex-shrink: 0; }
+.income-color { color: var(--income-color); }
+.accent-color { color: var(--accent); }

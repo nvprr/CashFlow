@@ -48,3 +48,27 @@
 .summary-item-value { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
 .summary-item-value.income { color: var(--income-color); }
 .summary-item-value.expense { color: var(--expense-color); }
+
+/* ── Dot timeline chart hints ── */
+.chart-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin: -8px 0 10px;
+}
+.chart-legend-inline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.dot-income, .dot-expense {
+  display: inline-block;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.dot-income  { background: var(--income-color); }
+.dot-expense { background: var(--expense-color); }
+
+canvas { display: block; max-width: 100%; }
