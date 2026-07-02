@@ -1,0 +1,98 @@
+/* === SETTINGS === */
+.settings-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.settings-group h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+.settings-row + .settings-row { border-top: 1px solid var(--border); }
+
+.toggle-group { display: flex; gap: 6px; }
+.toggle-btn {
+  background: var(--bg-input);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-family: var(--font);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.toggle-btn.active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.accent-picker { display: flex; gap: 8px; flex-wrap: wrap; }
+.accent-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transition-spring), border-color var(--transition-fast);
+}
+.accent-dot.active { border-color: var(--text-primary); transform: scale(1.2); }
+
+.settings-select {
+  background: var(--bg-input);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 0.88rem;
+  font-family: var(--font);
+  color: var(--text-primary);
+  outline: none;
+  -webkit-appearance: none;
+  min-width: 160px;
+}
+
+/* Categories manager */
+.categories-manager { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+.category-item-emoji { font-size: 1.1rem; }
+.category-item-name { flex: 1; color: var(--text-primary); }
+.category-delete {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+  line-height: 1;
+}
+
+.app-version {
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  padding: 20px 0 8px;
+}

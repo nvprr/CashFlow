@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="pl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f0f13" id="theme-color-meta" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CashFlow" />
+  <title>CashFlow</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <link rel="stylesheet" href="css/transactions.css" />
+  <link rel="stylesheet" href="css/charts.css" />
+  <link rel="stylesheet" href="css/goals.css" />
+  <link rel="stylesheet" href="css/calculator.css" />
+  <link rel="stylesheet" href="css/settings.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="topbar" id="topbar">
+      <div class="topbar-left">
+        <div class="app-logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>CashFlow</span>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <button class="icon-btn" id="theme-toggle" aria-label="Zmień motyw">
+          <svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn" id="open-settings-btn" aria-label="Ustawienia">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="main-content" id="main-content">
+      <!-- DASHBOARD -->
+      <section class="tab-view active" id="tab-dashboard">
+        <div class="dashboard-hero">
+          <p class="hero-label">Saldo całkowite</p>
+          <h1 class="hero-balance" id="hero-balance">0,00 zł</h1>
+          <p class="hero-month" id="hero-month">Lipiec 2026</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card income">
+            <div class="stat-icon">↑</div>
+            <div class="stat-info">
+              <span class="stat-label">Przychody</span>
+              <span class="stat-value" id="stat-income">0,00 zł</span>
+            </div>
+          </div>
+          <div class="stat-card expense">
+            <div class="stat-icon">↓</div>
+            <div class="stat-info">
+              <span class="stat-label">Wydatki</span>
+              <span class="stat-value" id="stat-expense">0,00 zł</span>
+            </div>
+          </div>
+          <div class="stat-card savings">
+            <div class="stat-icon">◎</div>
+            <div class="stat-info">
+              <span class="stat-label">Oszczędności</span>
+              <span class="stat-value" id="stat-savings">0,00 zł</span>
+            </div>
+          </div>
+        </div>
+        <div class="section-header">
+          <h2>Smart Insights</h2>
+        </div>
+        <div class="insights-container" id="insights-container">
+          <div class="insight-card">
+            <span class="insight-icon">💡</span>
+            <span class="insight-text">Dodaj pierwszą transakcję, aby zobaczyć analizy.</span>
+          </div>
+        </div>
+        <div class="section-header">
+          <h2>Ostatnie operacje</h2>
+          <button class="text-btn" id="see-all-btn">Zobacz wszystkie</button>
+        </div>
+        <div class="transactions-list" id="recent-transactions">
+          <div class="empty-state">
+            <div class="empty-icon">💳</div>
+            <p>Brak transakcji</p>
+            <span>Dodaj pierwszą operację, używając przycisku poniżej</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRANSACTIONS -->
+      <section class="tab-view" id="tab-transactions">
+        <div class="page-header">
+          <h2>Transakcje</h2>
+          <div class="filter-row">
+            <button class="filter-chip active" data-filter="all">Wszystkie</button>
+            <button class="filter-chip" data-filter="income">Przychody</button>
+            <button class="filter-chip" data-filter="expense">Wydatki</button>
+          </div>
+        </div>
+        <div class="search-bar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="search-input" placeholder="Szukaj transakcji..." />
+        </div>
+        <div class="transactions-list" id="all-transactions">
+          <div class="empty-state">
+            <div class="empty-icon">📋</div>
+            <p>Brak transakcji</p>
+            <span>Dodaj pierwszą operację</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHARTS -->
+      <section class="tab-view" id="tab-charts">
+        <div class="page-header">
+          <h2>Wykresy</h2>
+          <div class="period-selector">
+            <button class="filter-chip active" data-period="month">Miesiąc</button>
+            <button class="filter-chip" data-period="3months">3 miesiące</button>
+            <button class="filter-chip" data-period="year">Rok</button>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Wydatki według kategorii</h3>
+          <div class="donut-wrapper">
+            <canvas id="chart-donut" width="220" height="220"></canvas>
+            <div class="donut-legend" id="donut-legend"></div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Przychody vs Wydatki</h3>
+          <canvas id="chart-bar" width="100%" height="200"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Historia salda</h3>
+          <canvas id="chart-line" width="100%" height="180"></canvas>
+        </div>
+        <div class="chart-card summary-card">
+          <h3>Podsumowanie miesiąca</h3>
+          <div id="monthly-summary-content"></div>
+        </div>
+      </section>
+
+      <!-- GOALS -->
+      <section class="tab-view" id="tab-goals">
+        <div class="page-header">
+          <h2>Cele oszczędnościowe</h2>
+          <button class="icon-btn accent" id="add-goal-btn" aria-label="Dodaj cel">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+        <div class="goals-list" id="goals-list">
+          <div class="empty-state">
+            <div class="empty-icon">🎯</div>
+            <p>Brak celów</p>
+            <span>Dodaj cel, aby śledzić oszczędności</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CALCULATOR -->
+      <section class="tab-view" id="tab-calculator">
+        <div class="page-header"><h2>Kalkulator pracy</h2></div>
+        <div class="calc-card">
+          <h3>Stawka i godziny</h3>
+          <div class="form-group">
+            <label>Stawka godzinowa (zł/h)</label>
+            <input type="number" id="calc-rate" placeholder="np. 35" min="0" step="0.5" />
+          </div>
+          <div class="form-group">
+            <label>Przepracowane godziny</label>
+            <input type="number" id="calc-hours" placeholder="np. 8" min="0" step="0.5" />
+          </div>
+          <button class="btn-primary full-width" id="calc-btn">Oblicz</button>
+        </div>
+        <div class="calc-results" id="calc-results" style="display:none">
+          <div class="calc-result-card">
+            <span class="calc-label">Dniówka</span>
+            <span class="calc-value" id="calc-daily">0,00 zł</span>
+          </div>
+          <div class="calc-result-card">
+            <span class="calc-label">Tygodniowo (5 dni)</span>
+            <span class="calc-value" id="calc-weekly">0,00 zł</span>
+          </div>
+          <div class="calc-result-card">
+            <span class="calc-label">Miesięcznie (~22 dni)</span>
+            <span class="calc-value" id="calc-monthly">0,00 zł</span>
+          </div>
+          <button class="btn-secondary full-width" id="save-work-day-btn">💾 Zapisz dzień pracy</button>
+        </div>
+        <div class="section-header">
+          <h3>Historia dni pracy</h3>
+          <button class="text-btn danger" id="clear-work-history-btn">Wyczyść</button>
+        </div>
+        <div class="work-history-list" id="work-history-list">
+          <div class="empty-state small"><p>Brak historii</p></div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section class="tab-view" id="tab-settings">
+        <div class="page-header"><h2>Ustawienia</h2></div>
+        <div class="settings-group">
+          <h3>Wygląd</h3>
+          <div class="settings-row">
+            <span>Motyw</span>
+            <div class="toggle-group">
+              <button class="toggle-btn active" data-theme="dark">🌙 Ciemny</button>
+              <button class="toggle-btn" data-theme="light">☀️ Jasny</button>
+            </div>
+          </div>
+          <div class="settings-row">
+            <span>Kolor akcentu</span>
+            <div class="accent-picker" id="accent-picker">
+              <button class="accent-dot active" data-color="#6c63ff" style="background:#6c63ff" aria-label="Fioletowy"></button>
+              <button class="accent-dot" data-color="#00d4aa" style="background:#00d4aa" aria-label="Turkusowy"></button>
+              <button class="accent-dot" data-color="#ff6584" style="background:#ff6584" aria-label="Różowy"></button>
+              <button class="accent-dot" data-color="#ffd166" style="background:#ffd166" aria-label="Złoty"></button>
+              <button class="accent-dot" data-color="#06d6a0" style="background:#06d6a0" aria-label="Zielony"></button>
+              <button class="accent-dot" data-color="#ef476f" style="background:#ef476f" aria-label="Czerwony"></button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-group">
+          <h3>Waluta i format</h3>
+          <div class="settings-row">
+            <span>Waluta</span>
+            <select id="currency-select" class="settings-select">
+              <option value="PLN">PLN – Złoty polski</option>
+              <option value="EUR">EUR – Euro</option>
+              <option value="USD">USD – Dolar</option>
+              <option value="GBP">GBP – Funt</option>
+              <option value="CZK">CZK – Korona czeska</option>
+            </select>
+          </div>
+          <div class="settings-row">
+            <span>Format daty</span>
+            <select id="date-format-select" class="settings-select">
+              <option value="DD.MM.YYYY">DD.MM.YYYY</option>
+              <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+              <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+            </select>
+          </div>
+        </div>
+        <div class="settings-group">
+          <h3>Kategorie</h3>
+          <div class="categories-manager" id="categories-manager"></div>
+          <button class="btn-secondary" id="add-category-btn">+ Dodaj kategorię</button>
+        </div>
+        <div class="settings-group">
+          <h3>Dane</h3>
+          <button class="btn-secondary full-width" id="export-btn">📤 Eksportuj dane (JSON)</button>
+          <label class="btn-secondary full-width file-label">
+            📥 Importuj dane (JSON)
+            <input type="file" id="import-input" accept=".json" style="display:none" />
+          </label>
+          <button class="btn-secondary full-width" id="backup-btn">💾 Utwórz backup</button>
+          <button class="btn-danger full-width" id="clear-data-btn">🗑️ Wyczyść wszystkie dane</button>
+        </div>
+        <div class="app-version">CashFlow v0.1.0</div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" id="bottom-nav">
+      <button class="nav-item active" data-tab="dashboard">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span>Dashboard</span>
+      </button>
+      <button class="nav-item" data-tab="transactions">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>Transakcje</span>
+      </button>
+      <button class="nav-item add-center" id="fab-btn" aria-label="Dodaj">
+        <div class="fab-inner">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+      </button>
+      <button class="nav-item" data-tab="charts">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Wykresy</span>
+      </button>
+      <button class="nav-item" data-tab="goals">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <span>Cele</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- MODAL: Add Transaction -->
+  <div class="modal-overlay" id="modal-add-transaction" aria-modal="true" role="dialog">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3 id="modal-title">Dodaj transakcję</h3>
+        <button class="icon-btn modal-close" id="close-modal-btn" aria-label="Zamknij">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="type-toggle" id="type-toggle">
+        <button class="type-btn active" data-type="expense">↓ Wydatek</button>
+        <button class="type-btn" data-type="income">↑ Przychód</button>
+      </div>
+      <div class="modal-body">
+        <div class="amount-input-wrapper">
+          <span class="currency-prefix" id="currency-prefix">zł</span>
+          <input type="number" id="tx-amount" placeholder="0,00" min="0" step="0.01" class="amount-input" />
+        </div>
+        <div class="form-group">
+          <label>Kategoria</label>
+          <div class="category-grid" id="modal-category-grid"></div>
+        </div>
+        <div class="form-group">
+          <label>Opis</label>
+          <input type="text" id="tx-desc" placeholder="Opis transakcji..." maxlength="80" />
+        </div>
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Data</label>
+            <input type="date" id="tx-date" />
+          </div>
+          <div class="form-group half">
+            <label>Metoda płatności</label>
+            <select id="tx-method">
+              <option value="card">💳 Karta</option>
+              <option value="cash">💵 Gotówka</option>
+              <option value="transfer">🏦 Przelew</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-primary full-width" id="save-transaction-btn">Zapisz</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Goal -->
+  <div class="modal-overlay" id="modal-add-goal" aria-modal="true" role="dialog">
+    <div class="modal-sheet">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3 id="goal-modal-title">Nowy cel</h3>
+        <button class="icon-btn modal-close" data-close="modal-add-goal" aria-label="Zamknij">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Nazwa celu</label>
+          <input type="text" id="goal-name" placeholder="np. Nowy telefon" maxlength="40" />
+        </div>
+        <div class="form-group">
+          <label>Kwota docelowa</label>
+          <input type="number" id="goal-target" placeholder="np. 4000" min="1" step="1" />
+        </div>
+        <div class="form-group">
+          <label>Już odłożono</label>
+          <input type="number" id="goal-saved" placeholder="np. 2300" min="0" step="1" />
+        </div>
+        <div class="form-group">
+          <label>Emoji ikona</label>
+          <input type="text" id="goal-emoji" placeholder="🎯" maxlength="2" />
+        </div>
+        <button class="btn-primary full-width" id="save-goal-btn">Zapisz cel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Add Category -->
+  <div class="modal-overlay" id="modal-add-category" aria-modal="true" role="dialog">
+    <div class="modal-sheet small">
+      <div class="modal-handle"></div>
+      <div class="modal-header">
+        <h3>Nowa kategoria</h3>
+        <button class="icon-btn modal-close" data-close="modal-add-category" aria-label="Zamknij">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Emoji</label>
+          <input type="text" id="cat-emoji" placeholder="🛍️" maxlength="2" />
+        </div>
+        <div class="form-group">
+          <label>Nazwa</label>
+          <input type="text" id="cat-name" placeholder="np. Hobby" maxlength="20" />
+        </div>
+        <button class="btn-primary full-width" id="save-category-btn">Dodaj</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/categories.js"></script>
+  <script src="js/transactions.js"></script>
+  <script src="js/goals.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/calculator.js"></script>
+  <script src="js/insights.js"></script>
+  <script src="js/settings.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

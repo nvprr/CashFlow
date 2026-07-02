@@ -1,0 +1,38 @@
+/* === CALCULATOR === */
+.calc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin: 16px 0;
+}
+.calc-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: var(--text-secondary); }
+
+.calc-results { display: flex; flex-direction: column; gap: 10px; margin: 0 0 20px; }
+.calc-result-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  animation: fadeSlideIn 0.25s ease;
+}
+.calc-label { font-size: 0.88rem; color: var(--text-secondary); }
+.calc-value { font-size: 1.15rem; font-weight: 800; color: var(--accent); }
+
+.work-history-list { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.work-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 0.88rem;
+}
+.work-history-date { color: var(--text-muted); }
+.work-history-detail { color: var(--text-secondary); }
+.work-history-earn { color: var(--income-color); font-weight: 700; }

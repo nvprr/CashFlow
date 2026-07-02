@@ -1,0 +1,54 @@
+/* ============================================
+   CashFlow v0.1.0 — Bottom Nav
+   ============================================ */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 300;
+  transition: background var(--dur-med);
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  color: var(--text-tertiary);
+  transition: color var(--dur-fast), transform var(--dur-fast) var(--ease-spring);
+  min-width: 52px;
+}
+.nav-btn svg {
+  width: 22px;
+  height: 22px;
+  transition: stroke var(--dur-fast);
+}
+.nav-btn span {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.nav-btn.active {
+  color: var(--accent);
+}
+.nav-btn.active svg {
+  stroke: var(--accent);
+}
+.nav-btn:active {
+  transform: scale(0.88);
+}
