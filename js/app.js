@@ -60,28 +60,9 @@ const App = (() => {
     document.querySelectorAll('[data-goto]').forEach(btn =>
       btn.addEventListener('click', () => switchTab(btn.dataset.goto))
     );
-
-    // "Więcej" drawer
-    const moreBtn     = document.getElementById('more-btn');
-    const moreDrawer  = document.getElementById('more-drawer');
-    const moreOverlay = document.getElementById('more-overlay');
-
-    const openDrawer  = () => { moreDrawer?.classList.add('open'); moreOverlay?.classList.add('open'); };
-    const closeDrawer = () => { moreDrawer?.classList.remove('open'); moreOverlay?.classList.remove('open'); };
-
-    moreBtn?.addEventListener('click', () =>
-      moreDrawer?.classList.contains('open') ? closeDrawer() : openDrawer()
-    );
-    moreOverlay?.addEventListener('click', closeDrawer);
-
-    document.querySelectorAll('.more-item[data-tab]').forEach(btn =>
-      btn.addEventListener('click', () => {
-        closeDrawer();
-        switchTab(btn.dataset.tab);
-        // highlight active in drawer
-        document.querySelectorAll('.more-item').forEach(b => b.classList.remove('active-tab'));
-        btn.classList.add('active-tab');
-      })
+    // More tab tiles
+    document.querySelectorAll('.more-tile[data-tab]').forEach(btn =>
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab))
     );
   };
 
