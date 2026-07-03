@@ -1,96 +1,86 @@
-/* === STORAGE MODULE v0.2.0 === */
+/* === STORAGE MODULE v0.3.0 === */
 const Storage = (() => {
   const KEYS = {
-    TRANSACTIONS: 'cf_transactions',
-    GOALS:        'cf_goals',
-    CATEGORIES:   'cf_categories',
-    SETTINGS:     'cf_settings',
-    WORK_HISTORY: 'cf_work_history',
+    TRANSACTIONS:  'cf_transactions',
+    GOALS:         'cf_goals',
+    CATEGORIES:    'cf_categories',
+    SETTINGS:      'cf_settings',
+    WORK_HISTORY:  'cf_work_history',
+    ACCOUNTS:      'cf_accounts',
+    BUDGETS:       'cf_budgets',
+    SCHEDULED:     'cf_scheduled',
+    WIDGET_LAYOUT: 'cf_widget_layout',
   };
 
-  // Safe read — never throws
   const get = (key) => {
     try {
       const val = localStorage.getItem(key);
       return val !== null ? JSON.parse(val) : null;
-    } catch (e) {
-      console.warn('Storage.get error', key, e);
-      return null;
-    }
+    } catch (e) { console.warn('Storage.get', key, e); return null; }
   };
 
-  // Safe write — never throws
   const set = (key, value) => {
-    try {
-      localStorage.setItem(key, JSON.stringify(value));
-      return true;
-    } catch (e) {
-      console.warn('Storage.set error', key, e);
-      return false;
-    }
+    try { localStorage.setItem(key, JSON.stringify(value)); return true; }
+    catch (e) { console.warn('Storage.set', key, e); return false; }
   };
 
   const remove = (key) => { try { localStorage.removeItem(key); } catch {} };
 
-  /* ---- Public accessors (always return safe defaults) ---- */
-
-  const getTransactions = () => get(KEYS.TRANSACTIONS) || [];
-  const setTransactions = (data) => set(KEYS.TRANSACTIONS, data);
-
-  const getGoals = () => get(KEYS.GOALS) || [];
-  const setGoals = (data) => set(KEYS.GOALS, data);
-
-  const getCategories = () => get(KEYS.CATEGORIES);   // null = use defaults
-  const setCategories = (data) => set(KEYS.CATEGORIES, data);
-
   const DEFAULT_SETTINGS = {
-    theme: 'dark',
-    accent: '#6c63ff',
-    currency: 'PLN',
-    dateFormat: 'DD.MM.YYYY',
+    theme: 'dark', accent: '#6c63ff', currency: 'PLN', dateFormat: 'DD.MM.YYYY',
   };
-  const getSettings = () => ({ ...DEFAULT_SETTINGS, ...(get(KEYS.SETTINGS) || {}) });
-  const setSettings = (data) => set(KEYS.SETTINGS, data);
-  const patchSettings = (patch) => setSettings({ ...getSettings(), ...patch });
 
-  const getWorkHistory = () => get(KEYS.WORK_HISTORY) || [];
-  const setWorkHistory = (data) => set(KEYS.WORK_HISTORY, data);
-
-  /* ---- Export / Import / Backup ---- */
+  const getTransactions  = () => get(KEYS.TRANSACTIONS)  || [];
+  const setTransactions  = (d) => set(KEYS.TRANSACTIONS, d);
+  const getGoals         = () => get(KEYS.GOALS)         || [];
+  const setGoals         = (d) => set(KEYS.GOALS, d);
+  const getCategories    = () => get(KEYS.CATEGORIES);
+  const setCategories    = (d) => set(KEYS.CATEGORIES, d);
+  const getSettings      = () => ({ ...DEFAULT_SETTINGS, ...(get(KEYS.SETTINGS) || {}) });
+  const setSettings      = (d) => set(KEYS.SETTINGS, d);
+  const patchSettings    = (p) => setSettings({ ...getSettings(), ...p });
+  const getWorkHistory   = () => get(KEYS.WORK_HISTORY)  || [];
+  const setWorkHistory   = (d) => set(KEYS.WORK_HISTORY, d);
+  const getAccounts      = () => get(KEYS.ACCOUNTS);
+  const setAccounts      = (d) => set(KEYS.ACCOUNTS, d);
+  const getBudgets       = () => get(KEYS.BUDGETS)        || [];
+  const setBudgets       = (d) => set(KEYS.BUDGETS, d);
+  const getScheduled     = () => get(KEYS.SCHEDULED)      || [];
+  const setScheduled     = (d) => set(KEYS.SCHEDULED, d);
+  const getWidgetLayout  = () => get(KEYS.WIDGET_LAYOUT);
+  const setWidgetLayout  = (d) => set(KEYS.WIDGET_LAYOUT, d);
 
   const exportAll = () => ({
-    transactions: getTransactions(),
-    goals:        getGoals(),
-    categories:   getCategories(),
-    settings:     getSettings(),
-    workHistory:  getWorkHistory(),
-    exportedAt:   new Date().toISOString(),
-    version:      '0.2.0',
+    transactions: getTransactions(), goals: getGoals(), categories: getCategories(),
+    settings: getSettings(), workHistory: getWorkHistory(), accounts: getAccounts(),
+    budgets: getBudgets(), scheduled: getScheduled(), widgetLayout: getWidgetLayout(),
+    exportedAt: new Date().toISOString(), version: '0.3.0',
   });
 
   const importAll = (raw) => {
     try {
-      const data = typeof raw === 'string' ? JSON.parse(raw) : raw;
-      if (Array.isArray(data.transactions)) setTransactions(data.transactions);
-      if (Array.isArray(data.goals))        setGoals(data.goals);
-      if (data.categories)                  setCategories(data.categories);
-      if (data.settings)                    setSettings({ ...DEFAULT_SETTINGS, ...data.settings });
-      if (Array.isArray(data.workHistory))  setWorkHistory(data.workHistory);
+      const d = typeof raw === 'string' ? JSON.parse(raw) : raw;
+      if (Array.isArray(d.transactions)) setTransactions(d.transactions);
+      if (Array.isArray(d.goals))        setGoals(d.goals);
+      if (d.categories)                  setCategories(d.categories);
+      if (d.settings)                    setSettings({ ...DEFAULT_SETTINGS, ...d.settings });
+      if (Array.isArray(d.workHistory))  setWorkHistory(d.workHistory);
+      if (d.accounts)                    setAccounts(d.accounts);
+      if (d.budgets)                     setBudgets(d.budgets);
+      if (d.scheduled)                   setScheduled(d.scheduled);
+      if (d.widgetLayout)                setWidgetLayout(d.widgetLayout);
       return true;
-    } catch (e) {
-      console.error('importAll failed', e);
-      return false;
-    }
+    } catch (e) { console.error('importAll', e); return false; }
   };
 
   const clearAll = () => Object.values(KEYS).forEach(remove);
 
   return {
-    getTransactions, setTransactions,
-    getGoals,        setGoals,
-    getCategories,   setCategories,
-    getSettings,     setSettings, patchSettings,
-    getWorkHistory,  setWorkHistory,
+    getTransactions, setTransactions, getGoals, setGoals,
+    getCategories, setCategories, getSettings, setSettings, patchSettings,
+    getWorkHistory, setWorkHistory, getAccounts, setAccounts,
+    getBudgets, setBudgets, getScheduled, setScheduled,
+    getWidgetLayout, setWidgetLayout,
     exportAll, importAll, clearAll,
   };
 })();

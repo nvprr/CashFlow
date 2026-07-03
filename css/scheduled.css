@@ -1,0 +1,39 @@
+/* === SCHEDULED PAYMENTS === */
+.scheduled-forecast {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.forecast-month {
+  flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 12px; text-align: center;
+}
+.fm-label  { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 4px; text-transform: capitalize; }
+.fm-amount { font-size: 0.95rem; font-weight: 700; }
+
+.scheduled-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 14px; margin-bottom: 8px;
+  animation: fadeSlideIn 0.2s ease; transition: border-color var(--transition-fast);
+}
+.scheduled-card.urgent { border-color: rgba(255,101,132,0.4); }
+.scheduled-card.soon   { border-color: rgba(255,209,102,0.3); }
+.scheduled-card.inactive { opacity: 0.5; }
+.sch-icon { font-size: 1.4rem; flex-shrink: 0; }
+.sch-info { flex: 1; min-width: 0; }
+.sch-name { font-size: 0.92rem; font-weight: 600; color: var(--text-primary); }
+.sch-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+.sch-right { text-align: right; }
+.sch-amount { font-size: 0.95rem; font-weight: 700; }
+.sch-actions { display: flex; gap: 6px; justify-content: flex-end; margin-top: 4px; }
+.sch-toggle, .sch-del { background: none; border: none; cursor: pointer; font-size: 0.88rem; color: var(--text-muted); }
+.sch-del:hover { color: var(--expense-color); }
+
+/* Widget */
+.widget-sch-summary { display: flex; gap: 10px; margin-bottom: 10px; }
+.wss-item { flex: 1; background: var(--bg-input); border-radius: var(--radius-sm); padding: 10px; text-align: center; font-size: 0.78rem; color: var(--text-muted); }
+.wss-item strong { display: block; font-size: 0.95rem; margin-top: 3px; }
+.widget-sch-row { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.widget-sch-row:last-child { border-bottom: none; }
+.wsr-name { flex: 1; color: var(--text-secondary); }
+.wsr-days { font-size: 0.72rem; color: var(--text-muted); background: var(--bg-input); border-radius: 6px; padding: 2px 7px; }
+.wsr-amt  { font-weight: 700; }
