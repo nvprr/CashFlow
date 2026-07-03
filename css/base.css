@@ -118,7 +118,7 @@ body {
 
 .more-drawer {
   position: fixed;
-  bottom: calc(var(--bottomnav-h) + var(--safe-bottom));
+  bottom: 0;
   left: 0; right: 0;
   max-width: 480px;
   margin: 0 auto;
@@ -127,7 +127,7 @@ body {
   border: 1px solid var(--border-strong);
   border-bottom: none;
   z-index: 97;
-  padding: 0 20px 16px;
+  padding: 0 20px calc(var(--bottomnav-h) + var(--safe-bottom) + 8px);
   transform: translateY(100%);
   visibility: hidden;
   transition: transform 0.3s cubic-bezier(0.34, 1.1, 0.64, 1), visibility 0s linear 0.3s;
