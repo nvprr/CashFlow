@@ -113,7 +113,6 @@ const Widgets = (() => {
   // Individual widget renderers
   const _renderBalance = (el, s) => {
     const allSum  = Transactions.calcSummary(Transactions.getAll());
-    const accSum  = Accounts.getSummary();
     const month   = Transactions.getThisMonth();
     const mSum    = Transactions.calcSummary(month);
     const now     = new Date();
@@ -122,7 +121,7 @@ const Widgets = (() => {
         <h3 class="widget-title">💰 Saldo</h3>
         <span class="wbal-month">${now.toLocaleString('pl-PL',{month:'long',year:'numeric'})}</span>
       </div>
-      <div class="wbal-main">${formatCurrency(accSum.netWorth || allSum.balance, s.currency)}</div>
+      <div class="wbal-main">${formatCurrency(allSum.balance, s.currency)}</div>
       <div class="wbal-stats">
         <div class="wbal-stat"><span class="income">↑ ${formatCurrency(mSum.income,s.currency)}</span><small>Przychody</small></div>
         <div class="wbal-stat"><span class="expense">↓ ${formatCurrency(mSum.expense,s.currency)}</span><small>Wydatki</small></div>
